@@ -1,0 +1,19 @@
+{
+  "name": "preorder_manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "yarn workspace backend start:dev",
+    "dev:frontend": "yarn workspace frontend dev",
+    "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
