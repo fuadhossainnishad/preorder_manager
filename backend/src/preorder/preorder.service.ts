@@ -21,6 +21,8 @@ export class PreorderService {
   async findAll(filterDto: FilterPreorderDto) {
     const { filter, sortBy, sortOrder, page, limit } = filterDto;
 
+    console.log('🔍 Backend findAll called with:', { filter, sortBy, sortOrder, page, limit });
+
     const where: Prisma.PreorderWhereInput = {};
     if (filter === PreorderFilter.ACTIVE) where.status = true;
     else if (filter === PreorderFilter.INACTIVE) where.status = false;
@@ -28,6 +30,8 @@ export class PreorderService {
     const orderBy: Prisma.PreorderOrderByWithRelationInput = {
       [sortBy]: sortOrder,
     };
+
+    console.log('📊 Order By:', orderBy);
 
     const skip = (page - 1) * limit;
 
@@ -40,6 +44,8 @@ export class PreorderService {
       }),
       this.prismaService.prisma.preorder.count({ where }),
     ]);
+
+    console.log('📊 Returned items:', items.length, 'Total:', total);
 
     return {
       items,
